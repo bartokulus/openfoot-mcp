@@ -1,0 +1,38 @@
+{
+  "name": "openfoot-mcp",
+  "version": "0.1.0",
+  "description": "Native Model Context Protocol (MCP) server for OpenFootAPI — football fixtures, standings, lineups, events timeline, shot-level xG and match context.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "openfoot-mcp": "src/index.js"
+  },
+  "files": [
+    "src",
+    "scripts",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "mcp",
+    "modelcontextprotocol",
+    "football",
+    "soccer",
+    "xg",
+    "expected-goals",
+    "football-api",
+    "sports-data",
+    "openfoot"
+  ],
+  "scripts": {
+    "start": "node src/index.js",
+    "smoke": "node scripts/smoke.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "zod": "^3.25.0"
+  }
+}
