@@ -6,8 +6,8 @@
  * live events, shot-level xG, fair odds) as MCP tools so an LLM client can
  * query real football data instead of hallucinating.
  *
- * Auth: set OPENFOOT_API_KEY (keys use the of_live_ or fs_live_ prefix).
- * Free tier: 1,000 requests/month.
+ * Auth: set OPENFOOT_API_KEY (keys use the of_live_ prefix).
+ * Free tier: 5,000 requests/month.
  */
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
@@ -31,7 +31,7 @@ async function call(path, query = {}) {
     return {
       error: "missing_api_key",
       message:
-        "OPENFOOT_API_KEY is not set. Create a free key (1,000 requests/month) at https://openfootapi.com/sign-in and put it in the server's env.",
+        "OPENFOOT_API_KEY is not set. Create a free key (5,000 requests/month) at https://openfootapi.com/pricing and put it in the server's env.",
     };
   }
 

@@ -10,7 +10,7 @@ MCP server for the [OpenFootAPI](https://openfootapi.com/) football intelligence
 npx openfoot-mcp
 ```
 
-Set your API key in the environment. Free tier: 2,000 requests/month. Get a key at [openfootapi.com/sign-in](https://openfootapi.com/sign-in).
+Set your API key in the environment. Free tier: 5,000 requests/month. Get a key at [openfootapi.com/pricing](https://openfootapi.com/pricing).
 
 ### Claude Desktop / Claude Code
 
@@ -20,7 +20,7 @@ Set your API key in the environment. Free tier: 2,000 requests/month. Get a key 
     "openfoot": {
       "command": "npx",
       "args": ["-y", "openfoot-mcp"],
-      "env": { "OPENFOOT_API_KEY": "fs_live_..." }
+      "env": { "OPENFOOT_API_KEY": "of_live_..." }
     }
   }
 }
@@ -63,7 +63,7 @@ Call `openfoot_competitions` and check your league before you build on it.
 
 ## Quota behaviour
 
-- Free: 2,000 requests/month, 15 req/min. Developer $14/month: 25,000 requests/month, 100 req/min, includes xG, shot maps, lineups, live events and fair odds. Pro $39/month: 100,000/month, 250 req/min.
+- Free: 5,000 requests/month, 15 req/min. Developer $14/month: 250,000 requests/month, 100 req/min, includes xG, shot maps, lineups, live events and fair odds. Pro $39/month: 2,000,000/month, 250 req/min.
 - **No overage billing.** When the quota is spent the API returns 429; this server surfaces that as a `quota_or_rate_limit` error rather than an empty result.
 - Quota resets on the 1st of the month, UTC.
 - Every request is metered, including 404s and empty results.
