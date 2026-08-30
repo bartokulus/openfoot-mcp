@@ -78,19 +78,19 @@ if (matchesRes?.data && Array.isArray(matchesRes.data) && matchesRes.data.length
 await runTool("openfoot_standings", { competition: "comp_bundesliga_de" });
 
 // 5. Lineups
-await runTool("openfoot_match_lineups", { id: sampleMatchId });
+await runTool("openfoot_match_lineups", { matchId: sampleMatchId });
 
 // 6. Match events
-await runTool("openfoot_match_events", { id: sampleMatchId });
+await runTool("openfoot_match_events", { matchId: sampleMatchId });
 
 // 7. Match xG
-await runTool("openfoot_match_xg", { id: sampleMatchId });
+await runTool("openfoot_match_xg", { matchId: sampleMatchId });
 
 // 8. Match context
-await runTool("openfoot_match_context", { id: sampleMatchId });
+await runTool("openfoot_match_context", { matchId: sampleMatchId });
 
 // 9. League xG
-await runTool("openfoot_league_xg", {});
+await runTool("openfoot_league_xg", { league: "epl" });
 
 // 10. Odds
 await runTool("openfoot_odds", { matchId: sampleMatchId });

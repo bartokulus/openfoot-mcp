@@ -16,7 +16,7 @@ import { z } from "zod";
 
 const BASE_URL = process.env.OPENFOOT_BASE_URL ?? "https://openfootapi.com";
 const API_KEY = process.env.OPENFOOT_API_KEY ?? "";
-const VERSION = "0.1.0";
+const VERSION = "0.1.1";
 
 /** Endpoints that never need a key, so the server is useful before signup. */
 const PUBLIC_PATHS = new Set(["/v1/health"]);
@@ -53,8 +53,22 @@ async function call(path, query = {}) {
     body = { raw: text.slice(0, 2000) };
   }
 
-  if (res.status === 401 || res.status === 403) {
-    return { error: "unauthorized", status: res.status, message: "API key missing, invalid or revoked.", body };
+  if (res.status === 401) {
+    return { error: "unauthorized", status: 401, message: "API key missing, invalid or revoked.", body };
+  }
+  if (res.status === 403) {
+    // Not the same failure as a 401. A 403 here means the key is valid and the plan simply does
+    // not include this endpoint — lineups, events, xG, league xG and odds are Developer-tier.
+    // Calling that "invalid or revoked" sends the agent, and the user, off to regenerate a key
+    // that was never the problem. Pass the upstream sentence through; it names the feature.
+    return {
+      error: "plan_upgrade_required",
+      status: 403,
+      message:
+        body?.error?.message ??
+        "Your plan does not include this endpoint. See https://openfootapi.com/pricing.",
+      body,
+    };
   }
   if (res.status === 429) {
     return {

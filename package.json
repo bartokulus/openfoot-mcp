@@ -1,6 +1,6 @@
 {
   "name": "openfoot-mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Native Model Context Protocol (MCP) server for OpenFootAPI — football fixtures, standings, lineups, events timeline, shot-level xG and match context.",
   "license": "MIT",
   "homepage": "https://openfootapi.com",
