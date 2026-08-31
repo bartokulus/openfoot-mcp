@@ -1,7 +1,7 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.bartokulus/openfoot-mcp",
-  "description": "Football fixtures, standings, lineups, live events, shot-level xG and derived match context from OpenFoot API, across 75 competitions.",
+  "description": "Football fixtures, standings, lineups, live events and shot-level xG across 75 competitions.",
   "repository": {
     "url": "https://github.com/bartokulus/openfoot-mcp",
     "source": "github"
@@ -18,7 +18,7 @@
       "environmentVariables": [
         {
           "name": "OPENFOOT_API_KEY",
-          "description": "OpenFoot API key. A free Starter key (5,000 requests/month) is available at https://openfootapi.com/pricing.",
+          "description": "OpenFoot API key. Free tier at https://openfootapi.com/pricing",
           "isRequired": true,
           "isSecret": true
         }
