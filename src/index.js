@@ -167,6 +167,20 @@ server.registerTool(
   tool(({ competition, season }) => call("/v1/standings", { competition, season })),
 );
 
+server.registerTool(
+  "openfoot_scorers",
+  {
+    title: "Get league leaders & top scorers",
+    description: "Get top scorers, assists and player card statistics for a competition.",
+    inputSchema: {
+      competition: z.string().describe("Competition ID, e.g. comp_premier_league_eng, comp_la_liga_es"),
+      season: z.string().optional().describe("Season in YYYY/YY format (e.g. 2026/27) or YYYY (e.g. 2026)"),
+    },
+  },
+  tool(({ competition, season }) => call("/v1/scorers", { competition, season })),
+);
+
+
 /* ----------------------------------------------------------- match deep dives */
 
 server.registerTool(
@@ -216,6 +230,35 @@ server.registerTool(
     },
   },
   tool(({ matchId }) => call(`/v1/matches/${encodeURIComponent(matchId)}/context`)),
+);
+
+
+/* ----------------------------------------------------------------- teams */
+
+server.registerTool(
+  "openfoot_team_squad",
+  {
+    title: "Get team squad roster",
+    description: "Full player roster for a team including shirt numbers, positions, ages and coach.",
+    inputSchema: {
+      teamId: z.string().describe("Canonical team ID, e.g. team_manchester_united_eng or FotMob numeric ID"),
+    },
+  },
+  tool(({ teamId }) => call(`/v1/teams/${encodeURIComponent(teamId)}/squad`)),
+);
+
+server.registerTool(
+  "openfoot_team_h2h",
+  {
+    title: "Get head-to-head match history",
+    description: "Head-to-head historical meetings between two teams with match outcomes, goal metrics and win/draw rates.",
+    inputSchema: {
+      teamId: z.string().describe("Canonical team ID of the primary team, e.g. team_arsenal_eng"),
+      opponent: z.string().describe("Canonical team ID or name of the opponent team, e.g. team_chelsea_eng"),
+      limit: z.number().int().min(1).max(50).optional().describe("Max previous meetings to return (default 10)"),
+    },
+  },
+  tool(({ teamId, opponent, limit }) => call(`/v1/teams/${encodeURIComponent(teamId)}/h2h`, { opponent, limit })),
 );
 
 /* ---------------------------------------------------------------- analytics */

@@ -1,7 +1,7 @@
 {
   "name": "openfoot-mcp",
   "mcpName": "io.github.bartokulus/openfoot-mcp",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Native Model Context Protocol (MCP) server for OpenFootAPI \u2014 football fixtures, standings, lineups, events timeline, shot-level xG and match context.",
   "license": "MIT",
   "homepage": "https://openfootapi.com",

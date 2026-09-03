@@ -20,7 +20,7 @@ await client.connect(transport);
 const { tools } = await client.listTools();
 console.log(`tools (${tools.length}):`);
 for (const t of tools) console.log(`  - ${t.name}`);
-assert.equal(tools.length, 12, "Expected exactly 12 tools registered");
+assert.equal(tools.length, 15, "Expected exactly 15 tools registered");
 
 const { prompts } = await client.listPrompts();
 console.log(`prompts (${prompts.length}): ${prompts.map((p) => p.name).join(", ")}`);
