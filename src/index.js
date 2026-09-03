@@ -138,11 +138,33 @@ server.registerTool(
   {
     title: "List matches",
     description:
-      "List fixtures and results with scores, kickoff times, status and teams. Filter by competition, team, status, date or season.",
+      "List fixtures and results with scores, live match minute (e.g. '74'', 'HT'), period ('1H', '2H', 'FT'), kickoff times, status and teams. Filter by competition, team, status ('live', 'finished', 'scheduled'), date or season.",
     inputSchema: {
       competition: z.string().optional().describe("Competition ID, e.g. 'comp_premier_league_eng', 'comp_bundesliga_de'"),
       team: z.string().optional().describe("Team ID or fuzzy name"),
-      status: z.enum(["SCHEDULED", "LIVE", "IN_PLAY", "PAUSED", "FINISHED", "POSTPONED", "CANCELLED"]).optional(),
+      status: z
+        .enum([
+          "scheduled",
+          "live",
+          "finished",
+          "postponed",
+          "SCHEDULED",
+          "LIVE",
+          "FINISHED",
+          "POSTPONED",
+          "IN_PLAY",
+          "PAUSED",
+          "CANCELLED",
+        ])
+        .optional()
+        .transform((s) => {
+          if (!s) return undefined;
+          const lower = s.toLowerCase();
+          if (lower === "in_play" || lower === "paused") return "live";
+          if (lower === "cancelled") return "postponed";
+          return lower;
+        })
+        .describe("Filter by match status: 'live', 'finished', 'scheduled' or 'postponed'"),
       from: z.string().optional().describe("Start date in YYYY-MM-DD format"),
       to: z.string().optional().describe("End date in YYYY-MM-DD format"),
       season: z.string().optional().describe("Season in YYYY/YY format (e.g. '2025/26')"),
