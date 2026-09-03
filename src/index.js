@@ -138,7 +138,7 @@ server.registerTool(
   {
     title: "List matches",
     description:
-      "List fixtures and results with scores, live match minute (e.g. '74'', 'HT'), period ('1H', '2H', 'FT'), kickoff times, status and teams. Filter by competition, team, status ('live', 'finished', 'scheduled'), date or season.",
+      "List fixtures and results with scores, verified numerical live match minute (e.g. 74), addedTime (e.g. 2 for 90+2), canonical period ('1H', 'HT', '2H', 'ET', 'PEN', 'FT', null), kickoff times, status and teams. Filter by competition, team, status ('live', 'finished', 'scheduled'), date or season.",
     inputSchema: {
       competition: z.string().optional().describe("Competition ID, e.g. 'comp_premier_league_eng', 'comp_bundesliga_de'"),
       team: z.string().optional().describe("Team ID or fuzzy name"),
