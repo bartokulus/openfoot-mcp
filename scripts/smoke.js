@@ -22,6 +22,18 @@ console.log(`tools (${tools.length}):`);
 for (const t of tools) console.log(`  - ${t.name}`);
 assert.equal(tools.length, 15, "Expected exactly 15 tools registered");
 
+const matchesTool = tools.find((t) => t.name === "openfoot_matches");
+assert.ok(matchesTool, "openfoot_matches tool must exist");
+const statusEnum = matchesTool.inputSchema.properties.status.enum;
+const expectedStatuses = [
+  "scheduled", "live", "finished", "postponed", "cancelled", "unknown",
+  "SCHEDULED", "LIVE", "FINISHED", "POSTPONED", "CANCELLED", "UNKNOWN",
+  "in_play", "paused", "IN_PLAY", "PAUSED",
+];
+for (const val of expectedStatuses) {
+  assert.ok(statusEnum.includes(val), `status enum must include '${val}'`);
+}
+
 const { prompts } = await client.listPrompts();
 console.log(`prompts (${prompts.length}): ${prompts.map((p) => p.name).join(", ")}`);
 assert.equal(prompts.length, 1, "Expected exactly 1 prompt registered");

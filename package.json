@@ -38,6 +38,7 @@
   ],
   "scripts": {
     "start": "node src/index.js",
+    "test": "node --test tests/*.test.mjs && npm run smoke",
     "smoke": "node scripts/smoke.js"
   },
   "dependencies": {
