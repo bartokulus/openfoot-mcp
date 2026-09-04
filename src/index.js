@@ -138,7 +138,7 @@ server.registerTool(
   {
     title: "List matches",
     description:
-      "List fixtures and results with scores, verified numerical live match minute (e.g. 74), addedTime (e.g. 2 for 90+2), canonical period ('1H', 'HT', '2H', 'ET', 'PEN', 'FT', null), kickoff times, status and teams. Filter by competition, team, status ('live', 'finished', 'scheduled', 'postponed', 'cancelled', 'unknown'), date or season.",
+      "List fixtures and results with scores, verified numerical live match minute (e.g. 74), addedTime (e.g. 2 for 90+2), canonical period ('1H', 'HT', '2H', 'ET', 'PEN', 'FT', null), kickoff times, status and teams. Filter by competition, team, status ('live', 'finished', 'scheduled', 'postponed', 'cancelled', 'unknown' — kickoff passed but live/final state unconfirmed upstream), date or season.",
     inputSchema: {
       competition: z.string().optional().describe("Competition ID, e.g. 'comp_premier_league_eng', 'comp_bundesliga_de'"),
       team: z.string().optional().describe("Team ID or fuzzy name"),
@@ -168,7 +168,9 @@ server.registerTool(
           if (lower === "in_play" || lower === "paused") return "live";
           return lower;
         })
-        .describe("Filter by match status: 'live', 'finished', 'scheduled', 'postponed', 'cancelled' or 'unknown'"),
+        .describe(
+          "Filter by match status: 'live' (in-play), 'finished' (match ended), 'scheduled' (upcoming), 'postponed' (rescheduled), 'cancelled' (called off), or 'unknown' (kickoff time has passed, but live updates or final score are not yet confirmed upstream)",
+        ),
       from: z.string().optional().describe("Start date in YYYY-MM-DD format"),
       to: z.string().optional().describe("End date in YYYY-MM-DD format"),
       season: z.string().optional().describe("Season in YYYY/YY format (e.g. '2025/26')"),
