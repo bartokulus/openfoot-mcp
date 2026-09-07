@@ -2,7 +2,7 @@
 
 MCP server for the [OpenFootAPI](https://openfootapi.com/) football intelligence API. Gives an LLM client real football data — fixtures, standings, lineups, live events, **shot-level xG with pitch coordinates**, and model-derived fair odds — instead of a hallucinated scoreline.
 
-12 tools, 1 prompt. Node ≥ 20, no build step.
+15 tools, 1 prompt. Node ≥ 20, no build step.
 
 ## Install
 
@@ -53,7 +53,7 @@ Prompt: `scout_team_form` — resolve a team, pull its last 5 matches, read the 
 
 ## Coverage, stated honestly
 
-The catalogue lists 75 competitions. **Depth is not uniform, and the catalogue is wider than the deep coverage.**
+The catalogue lists 120 competitions. **Depth is not uniform, and the catalogue is wider than the deep coverage.**
 
 - **Deepest:** Bundesliga, 2. Bundesliga, DFB Pokal, Superliga României
 - **Expanded European:** Eredivisie, Primeira Liga, Süper Lig, Pro League, Scottish Premiership
@@ -63,7 +63,7 @@ Call `openfoot_competitions` and check your league before you build on it.
 
 ## Quota behaviour
 
-- Free: 5,000 requests/month, 15 req/min. Developer $14/month: 250,000 requests/month, 100 req/min, includes xG, shot maps, lineups, live events and fair odds. Pro $39/month: 2,000,000/month, 250 req/min.
+- Free: 5,000 requests/month, 60 req/min. Developer $14/month: 250,000 requests/month, 100 req/min, includes xG, shot maps, lineups, live events and fair odds. Pro $39/month: 2,000,000/month, 250 req/min.
 - **No overage billing.** When the quota is spent the API returns 429; this server surfaces that as a `quota_or_rate_limit` error rather than an empty result.
 - Quota resets on the 1st of the month, UTC.
 - Every request is metered, including 404s and empty results.
